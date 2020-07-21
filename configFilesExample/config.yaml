@@ -1,0 +1,55 @@
+PROJECT_NAME: 'GEO'
+
+
+# Path to a JSON file with samples and their corresponding FASTQ files.
+SAMPLES_JSON: 'samples.json'
+OUTPUT_DIR: './test/GEOtest'
+
+# Name of your input
+control: 'Input'
+
+bam: False
+
+#####################################################
+##########  Genome data #############################
+#####################################################
+
+# - Index for bowtie2
+idx_bt2: '/sandbox/resources/species/human/ensembl/release-75/index-bowtie-2.3.0/Homo_sapiens.GRCh37.75.dna.toplevel'
+
+# - genome fasta
+genome_fasta: '/sandbox/resources/species/human/ensembl/release-75/Homo_sapiens.GRCh37.75.dna.toplevel.fa'
+
+# - your genome  :
+genome_size: '/sandbox/resources/species/human/ensembl/release-75/index-bowtie-2.3.0/Homo_sapiens.GRCh37.75.dna.toplevel.fa.fai'
+
+# - genome annotation gtf file :
+genome_gtf: 'data/homo_sapiens/Homo_sapiens.GRCh37.87.gtf'
+
+# - TSS file for QC
+genome_tss: 'data/GRCh37_TSS.bed'
+
+# - Blacklist
+blacklist: 'data/Blacklist-2.0/lists/hg19-blacklist.v2.bed'
+
+#####################################################
+##########  Alignment #############################
+#####################################################
+
+# - Alignment quality threshold
+MQ: 20
+
+
+# - Downsampling. Set the number of reads for downsampling
+target_reads: 30000000
+
+
+# MACS parameters for peak calling
+macs_g: hs
+macs_pvalue: 1e-5
+macs2_g: hs
+macs2_pvalue: 1e-5
+macs2_pvalue_broad_cutoff: 1e-5
+
+# config file for narrow or broad peak calling for all
+narrow_broad: './config/broad_narrow_histone_TF.yaml'
