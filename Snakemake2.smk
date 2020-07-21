@@ -4,19 +4,12 @@ import json
 import yaml
 import numpy as np
 from snakemake.logging import logger
-import re
 
-#shell.prefix("set -eo pipefail; echo BEGIN at $(date); ")
 
 configfile:config["all"]
 FILES = json.load(open(config['SAMPLES_JSON']))
 WORKDIR = os.path.abspath(config["OUTPUT_DIR"])
 PROJECT_NAME = config['PROJECT_NAME']
-
-
-###########################################################################
-#################### Defining samples, cases, controls ####################
-###########################################################################
 
 SAMPLES_NAMES = sorted(FILES.keys())
 
@@ -39,7 +32,7 @@ sampleList = FILES.keys()
 
 rule all:
     input:
-        expand("peaks/{sample}_peaks_q5_peaks.broakPeak",sample=sampleList)
+        expand("peaks/{sample}_peaks_q5_peaks.broadPeak",sample=sampleList)
 		
 rule filterDupInput:
 	input:getInput
@@ -219,7 +212,7 @@ rule callpeak:
 	input:
 		fragMet="tmpInsertSizeMet/{sample}_medFragLength.txt",
 		chip="tmpBdg/{sample}_qvalue.bdg"
-	output:"peaks/{sample}_peaks_q5_peaks.broakPeak"
+	output:"peaks/{sample}_peaks_q5_peaks.broadPeak"
 	run:
 		f=open("tmpInsertSizeMet/"+wildcards.sample+"_medFragLength.txt")
 		frag=f.readlines()[1].strip()
